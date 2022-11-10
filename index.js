@@ -14,6 +14,9 @@ app.use(expressLayout);
 
 app.use(express.static('assets'))
 
+app.set('layout extractStyle',true);
+app.set('layout extractScript',true)
+
 app.use('/',require('./routers/index'))
 
 app.listen(port , function(err){
