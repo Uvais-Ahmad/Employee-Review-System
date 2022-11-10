@@ -5,6 +5,7 @@ const path = require('path');
 const expressLayout = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 
+
 // EJS setup
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
@@ -12,10 +13,14 @@ app.set('views',path.join(__dirname,'views'));
 //Layout setup
 app.use(expressLayout);
 
+// Static setup
 app.use(express.static('assets'))
 
+// Layout setup
 app.set('layout extractStyle',true);
 app.set('layout extractScript',true)
+
+app.use(express.urlencoded());
 
 app.use('/',require('./routers/index'))
 
