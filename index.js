@@ -29,7 +29,7 @@ app.use(express.static('assets'))
 app.set('layout extractStyle',true);
 app.set('layout extractScript',true)
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:true}));
 
 app.use( session({
     name :'EmployeeReviewSystem',secret:'UvRushi',
@@ -41,6 +41,7 @@ app.use( session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
 app.use('/',require('./routers/index'))
 
 app.listen(port , function(err){

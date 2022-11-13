@@ -7,11 +7,9 @@ const User = require('../models/users');
 //done is a callback function 
 passport.use(new localStrategy({
     usernameFeild : 'email'
-    },function( email , passport , done ){
+    },function( email , password , done ){
         User.findOne( {email : email}, function( err , user ){
-
             if(err){
-                console.log('Error occur while login ',err);
                 return done(err);
             }
 
@@ -26,11 +24,13 @@ passport.use(new localStrategy({
 
 // this function used when we create session . it store encrpt key to client browser
 passport.serializeUser(function( user , done ){
+    console.log('called serialllized')
     return done(null , user);
 })
 
 // this use while we are using that encrypted key
 passport.deserializeUser( function (id , done ){
+    console.log('called deserialllized')
     User.findById(id , function(err , user ){
         if(err){
             console.log('Error occur while deserializeUser ',err);
@@ -39,5 +39,20 @@ passport.deserializeUser( function (id , done ){
         return done(null , user);
     })
 });
+
+passport.checkAuthentication = function(req , res , next ){
+    if(req.isAuthenticated()){
+        return next();
+    }
+
+    return res.redirect('/user/login');
+}
+
+passport.setAuthenticatedUser = function( req , res ,next ){
+    if(req.isAuthenticated()){
+        req.local.user = req.user;
+    }
+    next();
+}
 
 module.exports = passport;
