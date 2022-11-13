@@ -43,20 +43,6 @@ module.exports.create = async function(req , res ){
 }
 
 module.exports.createSession = function( req , res ){
-
-
-    // User.findOne( {email : req.body.email}, function( err , user ){
-    //     console.log('FindOne from config')
-    //     if(err){
-    //         console.log('Error occur while login ',err);return;
-    //     }
-
-    //     // if( !user || user.password != password ){
-    //     //     console.log('Password not matched');
-    //     // }
-
-    //     console.log('This is user : ',user);
-    // })
-    console.log('Create session successfull',req.body);
+    console.log('session created');
     return res.redirect('/');
 }

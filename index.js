@@ -11,25 +11,27 @@ const session = require('express-session');
 const passportLocal = require('./config/passport-local');
 
 
+app.use(express.urlencoded({extended:true}));
+
+// add cookies
+app.use(cookieParser());
+
+
+// Static setup
+app.use(express.static('assets'));
+
+//Layout setup
+app.use(expressLayout);
+
+
+// Layout setup
+app.set('layout extractStyles',true);
+app.set("layout extractScripts", true)
+
 // EJS setup
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 
-
-
-//Layout setup
-app.use(expressLayout);
-// add cookies
-app.use(cookieParser());
-
-// Static setup
-app.use(express.static('assets'))
-
-// Layout setup
-app.set('layout extractStyle',true);
-app.set('layout extractScript',true)
-
-app.use(express.urlencoded({extended:true}));
 
 app.use( session({
     name :'EmployeeReviewSystem',secret:'UvRushi',

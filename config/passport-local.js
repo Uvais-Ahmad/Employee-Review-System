@@ -1,19 +1,21 @@
 const passport = require('passport');
 console.log('passport local file');
-const localStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../models/users');
 
 //done is a callback function 
-passport.use(new localStrategy({
-    usernameFeild : 'email'
+passport.use(new LocalStrategy({
+    usernameField : 'email'
     },function( email , password , done ){
-        User.findOne( {email : email}, function( err , user ){
+        User.findOne( {email:email}, function( err , user ){
             if(err){
+                console.log('Error in finding the user');
                 return done(err);
             }
 
             if( !user || user.password != password ){
+                console.log('Invalid username/password')
                 return done(null , false);
             }
 
@@ -25,7 +27,7 @@ passport.use(new localStrategy({
 // this function used when we create session . it store encrpt key to client browser
 passport.serializeUser(function( user , done ){
     console.log('called serialllized')
-    return done(null , user);
+    return done(null , user.id);
 })
 
 // this use while we are using that encrypted key
@@ -50,7 +52,8 @@ passport.checkAuthentication = function(req , res , next ){
 
 passport.setAuthenticatedUser = function( req , res ,next ){
     if(req.isAuthenticated()){
-        req.local.user = req.user;
+        //req.user is handle by the passport js Only
+        res.locals.user = req.user;
     }
     next();
 }
