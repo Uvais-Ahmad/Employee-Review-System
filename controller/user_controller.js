@@ -45,13 +45,9 @@ module.exports.create = async function(req , res ){
 module.exports.createSession = function( req , res ){
     console.log('session created');
     
-    // if logged In user is admin or Employee
-    if(req.user.isAdmin){
-        return res.redirect('/');
-    }
-    else{
-        return res.redirect('/user/employee');
-    }
+    // if logged In user is admin or Employee    
+    return res.redirect('/');
+    
 }
 
 
@@ -66,7 +62,9 @@ module.exports.destroySession = function( req , res ){
 
 
 module.exports.employee = function( req , res ){
-    return res.render('_employee',{
-        title : 'Employee'
-    })
+    return res.redirect('/');
+}
+
+module.exports.admin = function( req ,res ){
+    return res.redirect('/');
 }
