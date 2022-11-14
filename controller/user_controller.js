@@ -46,3 +46,13 @@ module.exports.createSession = function( req , res ){
     console.log('session created');
     return res.redirect('/');
 }
+
+
+module.exports.destroySession = function( req , res ){
+    req.logout(function(err){
+        if(err){
+            console.log('Erro Occur while logout ',err);
+        }
+        return res.redirect('/user/login');
+    })
+}
