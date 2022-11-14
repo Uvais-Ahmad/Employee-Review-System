@@ -44,7 +44,14 @@ module.exports.create = async function(req , res ){
 
 module.exports.createSession = function( req , res ){
     console.log('session created');
-    return res.redirect('/');
+    
+    // if logged In user is admin or Employee
+    if(req.user.isAdmin){
+        return res.redirect('/');
+    }
+    else{
+        return res.redirect('/user/employee');
+    }
 }
 
 
@@ -54,5 +61,12 @@ module.exports.destroySession = function( req , res ){
             console.log('Erro Occur while logout ',err);
         }
         return res.redirect('/user/login');
+    })
+}
+
+
+module.exports.employee = function( req , res ){
+    return res.render('_employee',{
+        title : 'Employee'
     })
 }
