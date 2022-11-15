@@ -15,8 +15,6 @@ router.post('/create-session',passport.authenticate('local',{failureRedirect : '
 
 router.get('/logout',userCont.destroySession);
 
-
-router.use('/employee', passport.checkAuthentication , userCont.employee);
-
+router.use('/admin',require('./admin'));
 
 module.exports = router;
