@@ -35,3 +35,17 @@ module.exports.allEmployee = function( req , res ){
         }
     })
 }
+
+
+module.exports.handleAssignWork = function( req , res ){
+    console.log('Handle assign worl : ',req.body);
+
+    if(req.user.isAdmin){}
+    return res.redirect('back');
+}
+
+
+module.exports.addToAdmin = function( req , res ){
+    console.log('handle add to admin : ',req.body);
+    return res.redirect('back');
+}

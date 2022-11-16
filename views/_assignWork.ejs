@@ -8,22 +8,26 @@
             <h4>Assign Review</h4>
         </div>
 
-        <form class="p-3">
+        <form class="p-3" method="POST" action="/user/admin/assign-work">
             <p class="form-text mt-4">Receipent : </p>
-            <select class="form-select">
+            <select class="form-select" name="receipent">
                 <option disabled selected>Select receipent</option>
                 <% for( user of users){ %>
+                    <% let i=0; %> 
                     <option value="<%= user.name %>"><%= user.name %></option>
+                    <% i++; %> 
                 <% } %> 
                 
                 
             </select>
 
             <p class="form-text mt-4">Receiver : </p>
-            <select class="form-select">
+            <select class="form-select" name="receiver">
                 <option disabled selected>Select receiver</option>
                 <% for( user of users){ %>
+                    <% let i=0; %> 
                     <option value="<%= user.name %>"><%= user.name %></option>
+                    <% i++; %> 
                 <% } %>
             </select>
 
@@ -37,12 +41,12 @@
             <h4>Make Admin</h4>
         </div>
 
-        <form class="p-3">
+        <form class="p-3" method="POST" action="/user/admin/addToAdmin">
             <p class="form-text p-1">Select employee to make admin :</p>
-            <select class="form-select">
+            <select class="form-select" name="empAsAdminName">
                 <option disabled selected>Select Employee</option>
                 <% for( user of users){ %>
-                    <option value="<%= user.name %>"><%= user.name %></option>
+                    <option name="name" value="<%= user.name %>"><%= user.name %></option>
                 <% } %>
             </select>
             <button class="btn btn-success d-block mt-3 ms-auto">Add to admin</button>
