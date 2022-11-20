@@ -8,7 +8,8 @@
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Admin</th>
-            <th scope="col" class="w-25">Remove Employee</th>
+            <th scope="col" class="">Delete Emp</th>
+            <th scope="col" class="">Admin</th>
         </tr>
     </thead>
 
@@ -21,7 +22,13 @@
                 <td><%= user.name %> </td>
                 <td><%= user.email %> </td>
                 <td><%= user.isAdmin %> </td>
-                <td class="w-25"><a role="button" href="#" class="btn btn-danger">Delete</a></td>
+                <td ><a role="button" href="#" class="btn btn-danger">Delete</a></td>
+                <td >
+                    <!-- if user is admin them button is show otherwise not shown -->
+                    <% if(user.isAdmin){ %>
+                        <a role="button" href="/user/admin/removeFromAdmin/<%= user._id %>" class="btn btn-danger">Remove</a>
+                    <% } %> 
+                </td>
             </tr>
             <% i++; %> 
         <% } %> 

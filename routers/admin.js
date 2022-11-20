@@ -11,9 +11,11 @@ router.get('/assign-work',passport.checkAuthentication,adminCont.assignWork);
 router.get('/allEmployee',passport.checkAuthentication,adminCont.allEmployee);
 
 // handle the assigning work 
-router.post('/assign-work',passport.checkAuthentication,adminCont.handleAssignWork);
+router.post('/handleAssign-work',passport.checkAuthentication,adminCont.handleAssignWork);
 
 // handle to add employee as admin
 router.post('/addToAdmin',passport.checkAuthentication,adminCont.addToAdmin);
+
+router.get('/removeFromAdmin/:id' , passport.checkAuthentication , adminCont.removeFromAdmin);
 
 module.exports = router;
