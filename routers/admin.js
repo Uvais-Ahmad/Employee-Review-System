@@ -11,7 +11,7 @@ router.get('/assign-work',passport.checkAuthentication,adminCont.assignWork);
 router.get('/allEmployee',passport.checkAuthentication,adminCont.allEmployee);
 
 // handle the assigning work 
-router.post('/handleAssign-work',passport.checkAuthentication,adminCont.handleAssignWork);
+router.post('/handleAssign-work',passport.checkAuthentication,adminCont.handleCreateReview);
 
 // handle to add employee as admin
 router.post('/addToAdmin',passport.checkAuthentication,adminCont.addToAdmin);

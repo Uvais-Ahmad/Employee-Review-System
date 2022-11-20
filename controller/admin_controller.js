@@ -1,4 +1,5 @@
 const User = require('../models/users');
+const Review = require('../models/review');
 
 //  It render the page of assignWork
 module.exports.assignWork = function( req , res ){
@@ -39,10 +40,55 @@ module.exports.allEmployee = function( req , res ){
 }
 
         // Assign the employee to take review
-module.exports.handleAssignWork = function( req , res ){
-    console.log('Handle assign worl : ',req.body);
+module.exports.handleCreateReview = async function( req , res ){
 
-    if(req.user.isAdmin){}
+    try{
+
+        if(req.user.isAdmin){
+            console.log("REQ body : ",req.body)
+            //find receipent
+            let rcptUser = await User.findById(req.body.receipent);
+            //Review is not avail in finded receipent
+            if( !rcptUser.review ){
+                // create review file with null
+                let review = await Review.create(null);
+                let obj = { 'toReview':req.body.receiver};
+                console.log('review : ',review);
+
+                // add receiver id here to assign reveiw
+                (await review).to.push(obj);
+                // after push save it
+                review.save();
+
+                // add review id in User schema
+                rcptUser.review = (await review)._id;
+                rcptUser.save();
+                console.log('Review : ',review);
+                console.log('rcptUser : ',rcptUser);
+            }
+            //if not
+                // 1 create review 
+                // 2 add id of reveiver in "to"
+                // 3 add review id in recepent user review section
+                // then save receipent
+            else{
+                // let review = rcptUser.review;
+                review = await Review.findById(rcptUser.review)
+                let obj = { 'toReview':req.body.receiver};
+                await review.to.push(obj);
+                review.save();
+                console.log("else revieew" , review);
+            }
+        }
+    }
+    catch(err){
+        console.log('Error occur while add assignment ',err);
+    }
+     
+
+    // add receiver id in toreview
+
+    
     return res.redirect('back');
 }
 
