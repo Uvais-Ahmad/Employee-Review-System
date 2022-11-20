@@ -16,6 +16,9 @@ router.post('/handleAssign-work',passport.checkAuthentication,adminCont.handleAs
 // handle to add employee as admin
 router.post('/addToAdmin',passport.checkAuthentication,adminCont.addToAdmin);
 
+// To remove Employee as a admin
 router.get('/removeFromAdmin/:id' , passport.checkAuthentication , adminCont.removeFromAdmin);
+
+router.get('/removeEmp/:id', passport.checkAuthentication , adminCont.removeEmp);
 
 module.exports = router;

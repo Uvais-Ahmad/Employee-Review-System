@@ -75,3 +75,14 @@ module.exports.removeFromAdmin = function( req , res ){
     })
     
 }
+
+module.exports.removeEmp = function( req , res ){
+    console.log('handle remove Emp with id : ',req.params.id);
+    let id = req.params.id;
+    User.findByIdAndRemove(id , function( err , user ){
+        if(err){ console.log('Error occur while updating'); return; }
+
+        console.log('User deleted : ',user);
+        return res.redirect('back');
+    })
+}

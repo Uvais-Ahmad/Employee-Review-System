@@ -22,7 +22,7 @@
                 <td><%= user.name %> </td>
                 <td><%= user.email %> </td>
                 <td><%= user.isAdmin %> </td>
-                <td ><a role="button" href="#" class="btn btn-danger">Delete</a></td>
+                <td ><a role="button" href="/user/admin/removeEmp/<%= user._id %>" class="btn btn-danger">Delete</a></td>
                 <td >
                     <!-- if user is admin them button is show otherwise not shown -->
                     <% if(user.isAdmin){ %>
