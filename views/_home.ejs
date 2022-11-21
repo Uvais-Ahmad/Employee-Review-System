@@ -8,10 +8,15 @@
             <h4>Review</h4>
         </div>
 
-        <form class="p-3">
-            <p class="form-text p-1">TO : Uvais Ahmad</p>
-            <textarea rows="5" cols="20" class="reviewArea w-100 p-2" placeholder="describe the employee review"></textarea>
-            <button class="btn btn-success d-block mt-3 ms-auto">Add Review</button>
+        <form class="p-3" method="post" action="">
+            <% if(revRequest) { %>
+                
+                
+                <p class="form-text p-1">To : <%= revRequest.name %>  </p>
+                <input type="hidden" name="empId" value="<%= revRequest._id %>">
+                <textarea name="review" rows="5" cols="20" class="reviewArea w-100 p-2" placeholder="describe the employee review"></textarea>
+                <button class="btn btn-success d-block mt-3 ms-auto" type="submit">Add Review</button>
+            <% } %> 
         </form>
     </div>
 
