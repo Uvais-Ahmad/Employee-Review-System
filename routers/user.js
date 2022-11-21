@@ -15,6 +15,10 @@ router.post('/create-session',passport.authenticate('local',{failureRedirect : '
 
 router.get('/logout',userCont.destroySession);
 
+router.post('/adding-review',userCont.addingReview);
+
 router.use('/admin',require('./admin'));
+
+
 
 module.exports = router;
