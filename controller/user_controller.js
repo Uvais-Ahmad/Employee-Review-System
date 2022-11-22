@@ -73,38 +73,43 @@ module.exports.admin = function( req ,res ){
 module.exports.addingReview = async function( req , res ){
     // here we add user review to that userr which is _id is req.body.empId
     try{
-        let emp = await User.findById(req.body.empId).populate('review');
-        console.log("FRom adding review ")
-        let empReview = emp.review;
+        // let emp = await User.findById(req.body.empId).populate('review');
+        let emp = await User.findById(req.body.empId);
+        
+        let empReviewId = emp.review;
+        console.log("Emp Review ID : ",empReviewId);
         // if that user have already review file
-        if(empReview){
-           console.log("if state : ")
+        if(empReviewId){
+            let review = await Review.findById(empReviewId);
+
+            console.log("Emp whole rev : ",review);
             //add review in database
             let obj = {'reviewBy':req.user.name , 'review': req.body.review};
-            await emp.review.from.push(obj);
-            await emp.save();
-            console.log("Emp from if ",emp.review.from);
-
+            await review.from.push(obj);
+            await review.save();
+            console.log("Rev after push ",review);
         }
         // if user not have review file
         else{
             // first create empty review file
-            console.log('ELse ')
+            console.log('ELse empp ',emp)
             let empRev = await Review.create(null);
             let obj = {'reviewBy':req.user.name , 'review': req.body.review};
             //now add review whoch is given by other
             (await empRev).from.push(obj);
             await empRev.save();
-            console.log('Emprev : ',empRev);
+            console.log('Emprev new: ',empRev);
             // and set create review file to the user which not have review file
             emp.review = empRev._id;
             await emp.save();
-            console.log("emp after getting review : ",emp.review);
+            console.log("Emp after revied file added : ",emp);
+            
         }
         // Now after adding review to other user , our task is remove the user from "to" of loggedIn user
         let crntReview = await Review.findById(req.body.currentReview);
         await crntReview.to.pop();
         await crntReview.save();
+        console.log("Emp at last : ",emp);
     }
     catch(err){
         console.log('Error while adding reiew on db : ',err);
