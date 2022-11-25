@@ -1,5 +1,9 @@
+const dotenv = require('dotenv').config();
+
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/EmployeeReview_developer');
+console.log("Process Env ",process.env.MONGODB_URL);
+
+mongoose.connect(process.env.MONGODB_URL);
 console.log("mongoose connection");
 const db = mongoose.connection;
 
