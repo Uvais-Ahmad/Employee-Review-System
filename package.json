@@ -1,4 +1,7 @@
-{
+{"engines": {
+  "node": "16.16.0",
+  "npm": "8.14.0"
+},
   "name": "employeereview",
   "version": "1.0.0",
   "description": "this is used to take review of any employee",
