@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 8000;
+// const port = process.env.PORT || 8000;
 const path = require('path');
 const expressLayout = require('express-ejs-layouts');
 const db = require('./config/mongoose');
@@ -46,7 +46,7 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 app.use('/',require('./routers/index'))
 
-app.listen(port , function(err){
+app.listen(process.env.PORT || 8000 , function(err){
     if(err){ console.log('Issue comes while creating server ', err)}
     console.log('Server is runnig employee review on port ',port);
 })
