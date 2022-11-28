@@ -48,5 +48,5 @@ app.use('/',require('./routers/index'))
 
 app.listen(process.env.PORT || 8000 , function(err){
     if(err){ console.log('Issue comes while creating server ', err)}
-    console.log('Server is runnig employee review on port ',port);
+    console.log('Server is runnig employee review on port ',8000);
 })
